@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
-import javax.transaction.Transactional;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -60,7 +60,7 @@ public class UsuarioServicio implements UserDetailsService {
         usuarioRepositorio.save(usuario);
 
 //        Cuando el usuario se registra se le da la bienvenida
-        notificacionServicio.enviar("Bienvenidos al Tinder de Mascotas!", "Tinder de Mascota", usuario.getMail()); // mail y titulo del usuario recien registrado
+//        notificacionServicio.enviar("Bienvenidos al Tinder de Mascotas!", "Tinder de Mascota", usuario.getMail()); // mail y titulo del usuario recien registrado
     }
 
     @Transactional
@@ -141,7 +141,7 @@ public class UsuarioServicio implements UserDetailsService {
         if (mail == null || mail.isEmpty()) {
             throw new ErrorServicio("El mail del usuario no puede ser nulo");
         }
-        if (clave == null || clave.isEmpty() || clave.length() <= 6) {
+        if (clave == null || clave.isEmpty() || clave.length() <= 4) {
             throw new ErrorServicio("La clave del usuario no puede ser nulo");
         }
     }
